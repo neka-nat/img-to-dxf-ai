@@ -1,5 +1,9 @@
 version = 1
 requires-python = ">=3.11"
+resolution-markers = [
+    "python_full_version >= '3.13'",
+    "python_full_version < '3.13'",
+]
 
 [[package]]
 name = "annotated-types"
@@ -124,7 +128,7 @@ wheels = [
 
 [[package]]
 name = "google-genai"
-version = "1.28.0"
+version = "1.32.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
@@ -136,9 +140,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/23/f1/039bb08df4670e204c55b5da0b2fa5228dff3346bda01389a86b300f6f58/google_genai-1.28.0.tar.gz", hash = "sha256:e93053c02e616842679ba5ecce5b99db8c0ca6310623c55ff6245b5b1d293138", size = 221029 }
+sdist = { url = "https://files.pythonhosted.org/packages/03/ab/e6cdd8fa957c647ef00c4da7c59d0e734354bd49ed8d98c860732d8e1944/google_genai-1.32.0.tar.gz", hash = "sha256:349da3f5ff0e981066bd508585fcdd308d28fc4646f318c8f6d1aa6041f4c7e3", size = 240802 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3f/ea/b704df3b348d3ae3572b0db5b52438fa426900b0830cff664107abfdba69/google_genai-1.28.0-py3-none-any.whl", hash = "sha256:7fd506799005cc87d3c5704a2eb5a2cb020d45b4d216a802e606700308f7f2f3", size = 219384 },
+    { url = "https://files.pythonhosted.org/packages/59/55/be09472f7a656af1208196d2ef9a3d2710f3cbcf695f51acbcbe28b9472b/google_genai-1.32.0-py3-none-any.whl", hash = "sha256:c0c4b1d45adf3aa99501050dd73da2f0dea09374002231052d81a6765d15e7f6", size = 241680 },
 ]
 
 [[package]]
@@ -213,6 +217,7 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "scikit-image" },
     { name = "tqdm" },
+    { name = "vlm-recog" },
 ]
 
 [package.metadata]
@@ -225,6 +230,7 @@ requires-dist = [
     { name = "python-dotenv", specifier = ">=1.1.1" },
     { name = "scikit-image", specifier = ">=0.25.2" },
     { name = "tqdm", specifier = ">=4.67.1" },
+    { name = "vlm-recog", specifier = ">=0.1.4" },
 ]
 
 [[package]]
@@ -804,6 +810,22 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz", hash = "sha256:3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760", size = 393185 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a7/c2/fe1e52489ae3122415c51f387e221dd0773709bad6c6cdaa599e8a2c5185/urllib3-2.5.0-py3-none-any.whl", hash = "sha256:e6b01673c0fa6a13e374b50871808eb3bf7046c4b125b216f6bf1cc604cff0dc", size = 129795 },
+]
+
+[[package]]
+name = "vlm-recog"
+version = "0.1.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "google-genai" },
+    { name = "loguru" },
+    { name = "numpy" },
+    { name = "pillow" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/33/01/923d960855299c5a49f64651cd2751fb983efc3d12cbae7a7472f746aaba/vlm_recog-0.1.4.tar.gz", hash = "sha256:fcc3895d55fa711d7353780ebb58d48fd6abc908fd53759acd4de5aecc73b4e1", size = 1020655 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c8/e7/2d92bdafb675425a96e860ca12ce6ccdd13e880937bac953acde36664a78/vlm_recog-0.1.4-py3-none-any.whl", hash = "sha256:2ed3f957fd376489974cf3125ad844bfe6394dd29a5093db75b5b4701b7b9e2b", size = 7030 },
 ]
 
 [[package]]

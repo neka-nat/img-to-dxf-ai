@@ -37,6 +37,7 @@ def ransac_circle_fitting(
     max_iter: int = 1000,
     dist_threshold: float = 2.0,
     min_inliers: int = 300,
+    max_radius: float = 200.0,
 ) -> tuple[tuple[float, float, float] | None, np.ndarray | None]:
     if len(edge_points) < 3:
         return None, None
@@ -53,6 +54,8 @@ def ransac_circle_fitting(
         if c is None:
             continue
         cx, cy, r = c
+        if r > max_radius:
+            continue
 
         # インライア評価
         dists = np.sqrt((pts[:, 0] - cx) ** 2 + (pts[:, 1] - cy) ** 2)
@@ -107,6 +110,18 @@ def extract_edge_points(edges: np.ndarray) -> np.ndarray:
     return points
 
 
+def find_similar_circle(circles: list[Circle], circle: Circle) -> bool:
+    cx, cy, r = circle
+    for c in circles:
+        ccx, ccy, cr = c
+        if (
+            np.linalg.norm(np.array((ccx, ccy)) - np.array((cx, cy))) < r * 0.01 and
+            abs(cr - r) < r * 0.01
+        ):
+            return True
+    return False
+
+
 def detect_circles(img: np.ndarray) -> list[Circle]:
     gray = preprocess_image(img)
     edges = edge_detection(gray)
@@ -116,6 +131,8 @@ def detect_circles(img: np.ndarray) -> list[Circle]:
         circle, inliers_mask = ransac_circle_fitting(edge_points)
         if circle is None:
             break
+        if find_similar_circle(circles, circle):
+            continue
         circles.append(circle)
         edge_points = edge_points[~inliers_mask]
     return [Circle(center=circle[:2], radius=circle[2]) for circle in circles]

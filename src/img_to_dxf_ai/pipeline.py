@@ -10,7 +10,7 @@ from .colorize import colorize_img
 from .graph.graph_pipeline import build_line_graph_from_image
 from .graph.models import Graph
 from .img_proc.circle_detection import detect_circles
-from .detection import add_margin, extract_segmentation_masks, merge_boxes
+from .detection import extract_segmentation_masks
 from .separation import separate_images
 from .utils import pil_to_cv2
 
@@ -29,9 +29,7 @@ def convert_to_outline_graph(image: Image.Image, resume_from_last_log: bool = Fa
     else:
         log_dir = Path(f"logs_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
         log_dir.mkdir(parents=True, exist_ok=True)
-        segmentation_masks = extract_segmentation_masks(image)
-        merged_boxes = merge_boxes(segmentation_masks, iou_threshold=0.5, coverage_threshold=0.5)
-        merged_boxes = [add_margin(box, ((box[2] - box[0]) + (box[3] - box[1])) / 2.0 * 0.1) for box in merged_boxes]
+        merged_boxes = extract_segmentation_masks(image)
         with open(log_dir / "merged_boxes.json", "w") as f:
             json.dump(merged_boxes, f)
         cropped_images = [image.crop(box) for box in merged_boxes]
