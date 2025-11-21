@@ -35,7 +35,7 @@ _prompt = """The image is a 2D mechanical drawing. It contains projected views i
 """
 
 
-def colorize_img(input_img: Image.Image, backend: Literal["openai", "google", "reve"] = "openai") -> Image.Image:
+def colorize_img(input_img: Image.Image, backend: Literal["openai", "google", "reve"] = "google") -> Image.Image:
     if backend == "openai":
         client = OpenAI()
         img_bytes = BytesIO()
@@ -63,7 +63,7 @@ def colorize_img(input_img: Image.Image, backend: Literal["openai", "google", "r
         buffer.seek(0)
         client = genai.Client()
         response = client.models.generate_content(
-            model="gemini-2.5-flash-image-preview",
+            model="gemini-3-pro-image-preview",
             contents=[
                 types.Part.from_bytes(data=buffer.getvalue(), mime_type="image/png"),
                 types.Part.from_text(text=_prompt),
