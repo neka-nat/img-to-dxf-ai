@@ -1,5 +1,6 @@
 __pycache__/
 .env
 *.png
+!assets/*.png
 
 logs*

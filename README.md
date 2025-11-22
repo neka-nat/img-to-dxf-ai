@@ -40,3 +40,11 @@ graph TD
     E --> F[Build graph]
     F --> G[Export DXF/SVG]
 ```
+
+## Demo
+
+![input](./assets/b9-1.png)
+
+![detect](./assets/b9-1_1.png)
+
+![colorize](./assets/colorized_0.png)
