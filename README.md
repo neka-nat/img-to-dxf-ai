@@ -42,9 +42,16 @@ graph TD
 ```
 
 ## Demo
-
+### Input
 ![input](./assets/b9-1.png)
 
+### Detect each projected view
 ![detect](./assets/b9-1_1.png)
+
+### Colorize each drawing element
+* Red: Dimension lines (including extension lines, arrows, and dimension text)
+* Black: Auxiliary lines such as dashed, dotted, chain, or double-chain lines
+* Blue: Straight outer contour lines, excluding dimension and auxiliary lines
+* Green: Circular or arc-shaped outer contour lines, excluding dimension and auxiliary lines
 
 ![colorize](./assets/colorized_0.png)
