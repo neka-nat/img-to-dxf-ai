@@ -18,11 +18,6 @@ def preprocess_image(img: np.ndarray) -> np.ndarray:
         gray = img.copy()
 
     _, gray = cv2.threshold(gray, 230, 255, cv2.THRESH_BINARY)
-    # ヒストグラム平坦化
-    # gray = cv2.equalizeHist(gray)
-
-    # ノイズ低減（ガウシアンフィルタ）
-    # gray = cv2.GaussianBlur(gray, (3, 3), 0)
     return gray
 
 
@@ -34,10 +29,10 @@ def edge_detection(img: np.ndarray) -> np.ndarray:
 
 def ransac_circle_fitting(
     edge_points: list,
-    max_iter: int = 1000,
+    max_iter: int = 2000,
     dist_threshold: float = 2.0,
-    min_inliers: int = 300,
-    max_radius: float = 200.0,
+    min_inliers: int = 200,
+    max_radius: float = 500.0,
 ) -> tuple[tuple[float, float, float] | None, np.ndarray | None]:
     if len(edge_points) < 3:
         return None, None
@@ -55,6 +50,9 @@ def ransac_circle_fitting(
             continue
         cx, cy, r = c
         if r > max_radius:
+            continue
+
+        if r < 3.0:
             continue
 
         # インライア評価

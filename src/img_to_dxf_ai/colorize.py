@@ -59,6 +59,7 @@ def colorize_img(input_img: Image.Image, backend: Literal["openai", "google", "r
         return image
     elif backend == "google":
         buffer = BytesIO()
+        width, _ = input_img.size
         input_img.save(buffer, format="PNG")
         buffer.seek(0)
         client = genai.Client()
@@ -77,6 +78,7 @@ def colorize_img(input_img: Image.Image, backend: Literal["openai", "google", "r
         if out_part is None:
             raise ValueError("no image in model response")
         image = Image.open(BytesIO(out_part.inline_data.data))
+        image = resize_img(image, width)
         return image
     elif backend == "reve":
         return edit_image_with_reve(_prompt, input_img)

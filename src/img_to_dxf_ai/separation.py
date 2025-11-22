@@ -25,7 +25,6 @@ def separate_images(image: Image.Image) -> dict[str, Image.Image]:
         "black":[((  0,  0,  0), (180,255, 60))],  # 低 V（暗い色）
     }
 
-
     masks  = {}
     for name, hsv_ranges in ranges.items():
         mask = np.zeros(hsv.shape[:2], dtype=np.uint8)
