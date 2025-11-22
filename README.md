@@ -55,3 +55,6 @@ graph TD
 * Green: Circular or arc-shaped outer contour lines, excluding dimension and auxiliary lines
 
 ![colorize](./assets/colorized_0.png)
+
+### Export outline as SVG
+![svg](./assets/b9-1.svg)
