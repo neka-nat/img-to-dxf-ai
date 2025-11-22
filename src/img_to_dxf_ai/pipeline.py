@@ -42,8 +42,10 @@ def convert_to_outline_graph(image: Image.Image, resume_from_last_log: bool = Fa
             colorized_image.save(f"{log_dir}/colorized_{i}.png")
         logger.info(f"Building graphs...")
     graphs = []
-    for colorized_image, box in zip(colorized_images, merged_boxes):
+    for i, (colorized_image, box) in enumerate(zip(colorized_images, merged_boxes)):
         separated_images = separate_images(colorized_image)
+        for j, (name, image) in enumerate(separated_images.items()):
+            image.save(f"{log_dir}/separated_{name}_{j}_{i}.png")
         graph = build_line_graph_from_image(pil_to_cv2(separated_images["outlines"]))
         circles = detect_circles(pil_to_cv2(separated_images["circles"]))
         for circle in circles:
